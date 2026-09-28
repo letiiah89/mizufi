@@ -4969,7 +4969,7 @@ export default function Finance({
               <small>BETA</small>
             </div>
             <button type="button" className="topbar-settings-button" aria-label="Abrir ajustes" title="Ajustes" onClick={() => { setSpaceMenuOpen(false); setSettingsSection(null); setSettingsOpen(true); }}>⚙</button>
-            <NotificationCenter movements={data.movements} accounts={data.accounts} readScope={`${currentUserId}:${activeSpaceId}`} onOpenLatestReport={() => { rememberTab("categorias"); setCategoryView("patrimonio"); setPeriod("mes"); setPeriodOffset(-1); setTimeout(() => document.querySelector(".data-tools")?.scrollIntoView({ behavior: "smooth", block: "center" }), 100); }} />
+            <NotificationCenter movements={data.movements} accounts={data.accounts} readScope={`${currentUserId}:${activeSpaceId}`} onOpenLatestReport={() => { setSettingsOpen(true); setSettingsSection("informes"); setPeriod("mes"); setPeriodOffset(-1); setTimeout(() => document.querySelector(".data-tools")?.scrollIntoView({ behavior: "smooth", block: "center" }), 100); }} />
           </div>
         </header>
         {isSpaceReadOnly && <div className="space-readonly-note">Estás viendo «{activeSpace?.name}» en modo de solo lectura.</div>}
