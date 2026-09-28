@@ -1,0 +1,1 @@
+ALTER TABLE `vip_purchases` ADD `livemode` integer DEFAULT false NOT NULL;

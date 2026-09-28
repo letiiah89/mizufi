@@ -1,0 +1,68 @@
+.notification-wrap{position:relative}.notification-button{position:relative;display:grid;width:42px;height:42px;place-items:center;border:1px solid #d8e4df;border-radius:50%;background:#fff;color:#1f726c;font-size:23px;cursor:pointer}.notification-button b{position:absolute;right:-3px;top:-4px;display:grid;min-width:19px;height:19px;padding:0 5px;place-items:center;border-radius:10px;background:#d86f62;color:#fff;font-size:10px}.notification-panel{position:absolute;z-index:80;top:49px;right:0;width:min(390px,calc(100vw - 28px));padding:14px;border:1px solid #d7e4df;border-radius:18px;background:#fff;box-shadow:0 18px 50px #173b3930;color:#173b39}.notification-panel header{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 10px}.notification-panel header button{border:0;background:transparent;font-size:24px}.notification-panel article{display:grid;grid-template-columns:45px 1fr auto;gap:10px;align-items:center;padding:11px 4px;border-top:1px solid #edf1ef}.notification-panel article>span{color:#68827b;font-size:12px}.notification-panel article div{display:grid}.notification-panel small{color:#71847e}.notification-panel p{margin:8px 4px;color:#71847e}.feedback-form{display:grid;gap:14px}.feedback-kind{display:grid;grid-template-columns:1fr 1fr;gap:8px}.feedback-kind button,.data-tools button{padding:10px;border:1px solid #cbdcd6;border-radius:10px;background:#fff;color:#315b56;cursor:pointer}.feedback-kind button.selected{border-color:#229e96;background:#e8f7f3;color:#187d77}.feedback-form label,.account-security-grid label{display:grid;gap:6px;color:#415d57;font-weight:700}.feedback-form textarea{min-height:125px;padding:12px;border:1px solid #cbdcd6;border-radius:12px;resize:vertical}.feedback-form small{color:#70837d}.account-security-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.account-security-grid>div{display:grid;gap:10px;align-content:start;padding:16px;border:1px solid #e0e9e5;border-radius:14px}.account-security-grid h3,.data-tools h3{margin:0}.account-security-grid input{padding:11px;border:1px solid #cbdcd6;border-radius:10px}.account-verification{grid-column:1/-1}.monthly-review{margin:18px 0;padding:22px;border:1px solid #d9e7e1;border-radius:20px;background:linear-gradient(135deg,#f4fbf8,#fff)}.monthly-review header{display:flex;justify-content:space-between;gap:16px}.monthly-review header span{color:#29998f;font-size:11px;font-weight:800;letter-spacing:.13em}.monthly-review h2{margin:5px 0 0}.monthly-review header>strong{font-size:24px}.monthly-review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.monthly-review-grid article{display:grid;gap:6px;padding:13px;border-radius:13px;background:#fff}.monthly-review-grid span{color:#71847e;font-size:12px}.monthly-review-copy{color:#48615c}.data-tools{display:grid;grid-template-columns:1fr 1fr;gap:14px}.data-tools>div{padding:16px;border:1px solid #dce7e3;border-radius:14px}.data-tools p{color:#6d817b}.data-tools>div>div{display:flex;flex-wrap:wrap;gap:8px}.advanced-filters{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:9px;margin:-4px 0 16px}.advanced-filters label{display:grid;gap:4px;color:#667d76;font-size:11px}.advanced-filters select,.advanced-filters input{min-height:40px;padding:8px 10px;border:1px solid #d6e2de;border-radius:10px;background:#fff;color:#173b39}.empty-onboarding{display:grid;justify-items:center;gap:10px;padding:34px 20px;border:1px dashed #bcd6cd;border-radius:18px;background:#f6fbf9;text-align:center}.empty-onboarding h2,.empty-onboarding p{margin:0}.empty-onboarding p{max-width:480px;color:#637b74}
+@media(max-width:700px){.feedback-kind,.account-security-grid,.data-tools{grid-template-columns:1fr}.account-verification{grid-column:auto}.monthly-review header{align-items:flex-start}.monthly-review-grid{grid-template-columns:1fr 1fr}.advanced-filters{grid-template-columns:1fr 1fr}.notification-panel{position:fixed;top:68px;right:14px}}
+.theme-dark .notification-button,.theme-dark .notification-panel,.theme-dark .feedback-kind button,.theme-dark .monthly-review-grid article,.theme-dark .data-tools button,.theme-dark .advanced-filters select,.theme-dark .advanced-filters input{background:#18231f;color:#edf5f1;border-color:#40534d}.theme-dark .monthly-review,.theme-dark .empty-onboarding{background:#16231f;border-color:#40534d}.theme-dark .feedback-form textarea,.theme-dark .account-security-grid input{background:#111816;color:#edf5f1;border-color:#40534d}
+.notification-button{font-size:initial}.notification-button svg{width:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.security-password-toggle{justify-self:start;padding:0;border:0;background:transparent;color:#1d817a;font-weight:700;cursor:pointer}.beta-feedback-list{display:grid;gap:10px;margin-top:20px}.beta-feedback-list h3{margin:0}.beta-feedback-list article{display:grid;gap:5px;padding:13px;border:1px solid #dce7e3;border-radius:12px}.beta-feedback-list article header{display:flex;justify-content:space-between;gap:12px}.beta-feedback-list small{color:#6d817b}.beta-feedback-list p{margin:0;white-space:pre-wrap}.theme-dark .beta-feedback-list article{border-color:#40534d}
+.notification-button{width:34px;height:34px;border-radius:10px}.notification-button svg{width:18px}
+.notification-report{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;width:100%;padding:12px 4px;border:0;border-top:1px solid #edf1ef;background:transparent;color:#173b39;text-align:left}.notification-report>span{display:grid;width:30px;height:30px;place-items:center;border-radius:50%;background:#e8f7f3;color:#187d77;font-weight:800}.notification-report>div{display:grid}.notification-report small{color:#71847e}.notification-report>b{color:#187d77;font-size:11px}.theme-dark .notification-report{color:#edf5f1;border-color:#40534d}
+
+/* Keep the beta guidance cards aligned with MiZUFi's established type scale. */
+.empty-onboarding h2{font-size:16px;font-weight:600;line-height:1.35}
+.empty-onboarding p{font-size:13px;line-height:1.55}
+.empty-onboarding button{font-size:12px}
+.monthly-review h2{font-size:18px;line-height:1.35}
+.monthly-review-copy{font-size:13px;line-height:1.55}
+.data-tools h3{font-size:16px;line-height:1.35}
+.data-tools p{font-size:13px;line-height:1.5}
+.data-tools button{font-size:12px}
+
+@media(max-width:700px){
+  .empty-onboarding h2,.data-tools h3{font-size:15px}
+  .empty-onboarding p,.data-tools p,.monthly-review-copy{font-size:12px}
+  .monthly-review h2{font-size:16px}
+}
+.movement-filter-details{margin:-6px 0 16px;border:1px solid #d6e2de;border-radius:11px;background:#fff}.movement-filter-details>summary{display:flex;align-items:center;min-height:38px;padding:0 12px;color:#315b56;font-size:11px;font-weight:750;cursor:pointer;list-style:none}.movement-filter-details>summary::-webkit-details-marker{display:none}.movement-filter-details>summary:after{content:"⌄";margin-left:auto;transition:transform .2s}.movement-filter-details[open]>summary:after{transform:rotate(180deg)}.movement-filter-details>summary span{display:grid;min-width:18px;height:18px;margin-left:8px;place-items:center;border-radius:10px;background:#e6f5f1;color:#187d77;font-size:9px}.movement-filter-details .advanced-filters{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0;padding:0 10px 10px}.movement-filter-details .advanced-filters label{font-size:10px}.movement-filter-details .advanced-filters select,.movement-filter-details .advanced-filters input{min-height:36px;font-size:11px}.theme-dark .movement-filter-details{background:#18231f;border-color:#40534d}.theme-dark .movement-filter-details>summary{color:#edf5f1}@media(max-width:700px){.movement-filter-details .advanced-filters{grid-template-columns:1fr 1fr}}
+
+.movement-filter-details .advanced-filters label{min-width:0}
+.movement-filter-details .advanced-filters select,.movement-filter-details .advanced-filters input{width:100%;min-width:0;max-width:100%}
+@media(max-width:480px){.movement-filter-details .advanced-filters{grid-template-columns:1fr}}
+
+/* Reports and imports follow the compact type scale used throughout Settings. */
+.data-tools.single{grid-template-columns:1fr}
+.data-tools.single>div{padding:14px}
+.data-tools h3{font-size:14px;font-weight:650;line-height:1.35}
+.data-tools p{font-size:12px;line-height:1.5}
+.data-tools button{font-size:11px}
+.data-tools.single strong{color:inherit}
+.report-period-picker{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px!important;width:100%;padding:12px;border-radius:12px;background:#f5faf8}.report-period-picker label{display:grid;gap:5px;color:#58706a;font-size:11px}.report-period-picker select,.report-period-picker input{width:100%;min-width:0;min-height:38px;padding:8px 10px;border:1px solid #cfddd8;border-radius:9px;background:#fff;color:#173b39}.report-period-picker small{grid-column:1/-1;color:#187d77}.report-download-actions{margin-top:10px}.theme-dark .report-period-picker{background:#111b18}.theme-dark .report-period-picker select,.theme-dark .report-period-picker input{background:#18231f;color:#edf5f1;border-color:#40534d}@media(max-width:520px){.report-period-picker{grid-template-columns:1fr}}
+/* Keep the date affordance visible in every form, including the installed PWA. */
+input[type="date"],
+input[type="month"] {
+  min-width: 0;
+  padding-right: 42px !important;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23177f78' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M16 3v4M8 3v4M3 10h18'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 13px center !important;
+  background-size: 18px 18px !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+  width: 28px;
+  height: 28px;
+  margin-right: -5px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.theme-dark input[type="date"],
+.theme-dark input[type="month"] {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-auto input[type="date"],
+  .theme-auto input[type="month"] {
+    color-scheme: dark;
+  }
+}

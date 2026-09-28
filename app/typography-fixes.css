@@ -1,0 +1,41 @@
+.target-inputs input {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.target-inputs span {
+  bottom: 14px;
+  font-size: 10px;
+}
+
+@media (max-width: 680px) {
+  .target-inputs input {
+    font-size: 12px;
+  }
+}
+
+.settings-category-manager .category-editor {
+  position: fixed;
+  z-index: 1003;
+  top: 50%;
+  left: 50%;
+  width: min(520px, calc(100vw - 32px));
+  max-height: min(82vh, 680px);
+  margin: 0;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 22px 70px #173b3950;
+}
+
+.toast {
+  z-index: 1100;
+}
+
+/* Mantiene "Actual" en la misma escala que los filtros de periodo. */
+.period-inline-navigation .period-today-button,
+.period-navigation > .period-today-button {
+  font-family: inherit;
+  font-size: 11px !important;
+  font-weight: 500;
+  line-height: 1;
+}
