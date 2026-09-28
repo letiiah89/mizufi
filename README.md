@@ -1,107 +1,194 @@
-# vinext-starter
+# MiZuFi — Marea · Finanzas con calma
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Una app de finanzas personales construida para controlar gastos, presupuestos, deudas y metas de ahorro con claridad y sin complicaciones.
 
-## Prerequisites
+**Versión:** 0.1.0 (Beta)  
+**Plataforma:** Cloudflare Workers + Next.js 16 + React 19
 
-- Node.js `>=22.13.0`
-- Linux with `flock`, `curl`, and GNU `timeout`
+---
 
-## Sites Lifecycle
+## Características
 
-The Sites lifecycle CLI runs the locked dependency install before returning this checkout. Edit the source under `app/`, then checkpoint when a coherent milestone is ready to inspect or share. The remote Sites builder runs `npm run build` against the pushed commit. Do not repeat install or build as a normal pre-checkpoint step.
+- **Cuentas múltiples:** corriente, ahorro, hucha, deudas, inversión
+- **Movimientos:** gastos, ingresos, traspasos, devoluciones
+- **Presupuestos:** categorías, subcategorías, límites mensuales
+- **Deudas:** seguimiento, cuotas, amortización
+- **Gastos anuales:** planificación de gasto periódico
+- **Espacios compartidos:** personal, demo, compartido con roles
+- **PWA:** funciona offline
+- **Autenticación:** Supabase Auth (correo + contraseña)
+- **Pagos:** Stripe (VIP)
+- **Notificaciones:** Resend (email)
 
-This starter does not use `wrangler.jsonc`.
+---
 
-`install:ci` is intentionally a single, non-retrying `npm ci`. It refuses a concurrent install for the same project, consumes a matching image-seeded npm cache with `--prefer-offline` while retaining registry fallback for a missing cache object, otherwise downloads and verifies the complete vinext tarball recorded in `package-lock.json`, limits npm to one socket, and terminates a stalled install. `build` applies a short timeout. These helpers target Linux and use GNU `timeout`; they are not native macOS scripts.
+## Stack técnico
 
-Scripts that need writable project-scoped home, npm, XDG, and temporary paths use `scripts/sites-env.sh`. The `dev` and `start` scripts honor the caller's runtime environment and keep Wrangler logs inside the checkout. The generated `.sites-runtime/` directory is disposable and ignored by Git.
+- **Frontend:** React 19, TypeScript, CSS custom
+- **Backend:** Next.js API Routes, Node.js
+- **Hosting:** Cloudflare Workers (Vinext)
+- **BD:** Cloudflare D1 (SQLite) + Drizzle ORM
+- **Auth:** Supabase
+- **Pagos:** Stripe
+- **Email:** Resend
+- **Build:** Vite + Wrangler
 
-## Included Shape
+---
 
-- edit site code under `app/`
-- `app/chatgpt-auth.ts` provides optional dispatch-owned ChatGPT sign-in helpers
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/index.ts` reads the D1 binding from the Cloudflare Worker environment
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+## Requisitos
 
-## Workspace Auth Headers
+- Node.js **22.13.0 o posterior**
+- npm (incluido con Node.js)
+- Cuenta de Supabase (auth)
+- Cuenta de Cloudflare (D1, Workers)
+- (Opcional) Stripe + Resend
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+---
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+## Instalación
 
-Treat the full name as optional and fall back to email when it is absent:
+### 1. Clonar y instalar
 
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+git clone https://github.com/letiiah89/mizufi.git
+cd mizufi
+npm ci
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+### 2. Configurar variables de entorno
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+Copia `.env.example` como `.env.local`:
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+```bash
+cp .env.example .env.local
+```
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Rellena con tus credenciales:
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your_key
+STRIPE_SECRET_KEY=sk_test_your_key
+RESEND_API_KEY=re_your_key
+STRIPE_WEBHOOK_SECRET=whsec_your_secret
+STRIPE_PRICE_ID=price_your_price
+```
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+### 3. Base de datos
 
-## Diagnostic Commands
+Si usas Cloudflare D1 local:
 
-- `npm run install:ci`: perform the one bounded lockfile install
-- `npm run dev`: start the Vite/Vinext development server
-- `npm run build`: build the deployable Sites artifact
-- `npm run start`: start the built Vinext application
-- `npm test`: build and verify the rendered development-preview metadata
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+```bash
+npm run db:generate  # Genera migraciones
+```
 
-Use build commands for targeted diagnosis after a remote failure, not as part of the normal checkpoint path.
+Aplica migraciones del fichero `drizzle/` al binding `DB`.
 
-The timeout defaults can be overridden for a controlled canary with `SITES_INSTALL_TIMEOUT`, `SITES_INSTALL_KILL_AFTER`, `SITES_BUILD_TIMEOUT`, and `SITES_BUILD_KILL_AFTER`. A timeout fails the command; the helpers never retry an unchanged install or build.
+---
 
-## Learn More
+## Desarrollo
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+### Iniciar servidor
+
+```bash
+npm run dev
+```
+
+Accede a `http://localhost:5173`
+
+### Build para producción
+
+```bash
+npm run build
+npm run start
+```
+
+### Lint y tests
+
+```bash
+npm run lint
+npm test
+```
+
+---
+
+## Estructura
+
+```
+app/
+  ├── finance.tsx           # Componente principal (gran)
+  ├── budgets.tsx           # Presupuestos
+  ├── debts.tsx             # Deudas
+  ├── annual-expenses.tsx   # Gastos anuales
+  ├── auth-gate.tsx         # Autenticación
+  ├── api/                  # Rutas API
+  │   ├── finance/          # CRUD financiero
+  │   ├── session/          # Sesión y preferencias
+  │   ├── spaces/           # Espacios
+  │   ├── vip/checkout/     # Checkout VIP (Stripe)
+  │   └── stripe/webhook/   # Webhook de Stripe
+  └── [más componentes]
+db/
+  ├── index.ts              # Conexión D1
+  └── schema.ts             # Esquema Drizzle
+drizzle/
+  ├── 0000_*.sql            # Migraciones
+  └── meta/
+```
+
+---
+
+## API
+
+### Autenticación
+- POST `/auth/signup` — Registrar
+- POST `/auth/login` — Iniciar sesión
+- POST `/auth/logout` — Cerrar sesión
+
+### Finanzas
+- GET `/api/finance` — Obtener datos (cuentas, movimientos, presupuestos)
+- POST `/api/finance` — Guardar datos
+
+### Sesión
+- GET `/api/session` — Obtener preferencias
+- POST `/api/session` — Actualizar preferencias
+
+### Espacios
+- GET `/api/spaces` — Espacios del usuario
+- POST `/api/spaces` — Crear espacio
+
+### VIP
+- POST `/api/vip/checkout` — Crear sesión de checkout
+- POST `/api/stripe/webhook` — Webhook de confirmación
+
+---
+
+## Notas
+
+- **Datos personales:** Se guardan en D1, no se sincronizan automáticamente. Usa el backup manual en Drive.
+- **Logging:** Desactiva logging en Supabase si usas Free Plan (evita costos).
+- **Componentes grandes:** `finance.tsx` (333KB) necesita refactor a componentes más pequeños.
+- **Código de ChatGPT:** Migrado de ChatGPT a GitHub para control de versiones.
+
+---
+
+## Desarrollo futuro
+
+- [ ] Refactorizar `finance.tsx` en componentes más pequeños
+- [ ] Mejorar tests (actualmente mínimos)
+- [ ] Sincronización de datos en tiempo real (Realtime)
+- [ ] Gráficas y reportes
+- [ ] Exportar datos (CSV, PDF)
+- [ ] Modo oscuro mejorado
+- [ ] App móvil nativa
+
+---
+
+## Licencia
+
+Privado. Código de MiZuFi.
+
+---
+
+**Última actualización:** 2026-09-28  
+**Mantenedor:** Leticia Aparicio

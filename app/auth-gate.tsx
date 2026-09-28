@@ -4,23 +4,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import Finance from "./finance";
 import { activateSavedAccount, authenticatedFetch, forgetSavedAccount, getSavedAccounts, rememberAccountSession, setRememberSession, supabase, type SavedMizufiAccount } from "./supabase-client";
-
-type BetaStats = {
-  registered: number;
-  started: number;
-  active7: number;
-  active30: number;
-  adClicks: number;
-  affiliateClicks: number;
-  subscribers: number;
-  capacity: {
-    profileCount: number; stateBytes: number; storageLimitBytes: number; storagePercent: number;
-    averageProfileBytes: number; largestProfileBytes: number; profileLimitBytes: number; largestProfilePercent: number;
-    nextUserReview: number;
-    alerts: Array<{ level: "good" | "info" | "warning" | "critical"; title: string; message: string }>;
-  };
-  feedback: Array<{ id: number; type: string; message: string; context: string; email: string; createdAt: number }>;
-};
+import type { BetaStats, FinanceSpace } from "./finance-store";
 
 type AccountContext = {
   displayName: string;
@@ -30,16 +14,6 @@ type AccountContext = {
   vipActive: boolean;
   vipRemaining: number;
   spaces: FinanceSpace[];
-};
-
-export type FinanceSpace = {
-  id: string;
-  name: string;
-  kind: "personal" | "demo" | "shared";
-  role: "owner" | "editor" | "viewer";
-  ownerEmail: string;
-  memberCount: number;
-  updatedAt: number;
 };
 
 type AuthMode = "login" | "register" | "forgot" | "reset" | "verify";
