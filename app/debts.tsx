@@ -898,31 +898,31 @@ export default function DebtPlanner({
               </>
             )}
             <div className="debt-form-grid">
-              <label htmlFor="payment-date">
-                Fecha
-              </label>
-              <input
-                id="payment-date"
-                name="date"
-                type="date"
-                defaultValue={extraPayment.defaults?.date ?? iso(new Date())}
-                required
-              />
-              <label htmlFor="payment-account">
-                Cuenta de pago
-              </label>
-              <select
-                id="payment-account"
-                name="account"
-                defaultValue={extraPayment.defaults?.account ?? extraPayment.debt.paymentAccount}
-                required
-              >
-                {paymentAccounts.map((account) => (
-                  <option key={account.id} value={account.id}>
-                    {account.name}
-                  </option>
-                ))}
-              </select>
+              <div>
+                <label htmlFor="payment-date">Fecha</label>
+                <input
+                  id="payment-date"
+                  name="date"
+                  type="date"
+                  defaultValue={extraPayment.defaults?.date ?? iso(new Date())}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="payment-account">Cuenta de pago</label>
+                <select
+                  id="payment-account"
+                  name="account"
+                  defaultValue={extraPayment.defaults?.account ?? extraPayment.debt.paymentAccount}
+                  required
+                >
+                  {paymentAccounts.map((account) => (
+                    <option key={account.id} value={account.id}>
+                      {account.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <label>
               Comisión (%) <span>opcional</span>
