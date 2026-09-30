@@ -228,6 +228,9 @@
   color: var(--ink);
   font-size: 11px;
 }
+.debt-dialog input[type="date"] {
+  padding-right: 35px;
+}
 .debt-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
